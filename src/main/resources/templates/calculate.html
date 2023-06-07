@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет стоимости доставки</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg-dark text-white" style="
+background-image: image('/static/background.jpg');
+background-size: auto;
+opacity: 100%;
+">
+<div>
+<div class="container bg-dark">
+    <h1 class="mt-5">Расчет стоимости доставки</h1>
+    <form th:action="@{/calculate}" method="post" >
+        <div class="row g-3">
+            <!--<div class="col-md-6">
+                <label for="orderCode" class="form-label">Код заказа</label>
+                <input type="text" class="form-control" id="orderCode" name="orderCode">
+            </div>-->
+            <div class="col-md-3">
+                <label for="cityFrom" class="form-label">Город отправления</label>
+                <input type="text" class="form-control" id="cityFrom" name="cityFrom">
+            </div>
+            <div class="col-md-3">
+                <label for="cityTo" class="form-label">Город назначения</label>
+                <input type="text" class="form-control" id="cityTo" name="cityTo">
+            </div>
+            <div class="col-md-4">
+                <label for="weight" class="form-label">Вес груза (кг)</label>
+                <input type="text" class="form-control" id="weight" name="weight">
+            </div>
+            <div class="col-md-4">
+                <label for="length" class="form-label">Длина (м)</label>
+                <input type="text" class="form-control" id="length" name="length">
+            </div>
+            <div class="col-md-4">
+                <label for="width" class="form-label">Ширина (м)</label>
+                <input type="text" class="form-control" id="width" name="width">
+            </div>
+            <div class="col-md-6">
+                <label for="height" class="form-label">Высота (м)</label>
+                <input type="text" class="form-control" id="height" name="height">
+            </div>
+            <div class="col-md-6">
+                <label for="cargoType" class="form-label">Тип груза</label>
+                <input type="text" class="form-control" id="cargoType" name="cargoType">
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Рассчитать стоимость доставки</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="card mt-5 bg-dark bg-gradient">
+        <div class="card-body">
+            <h5 class="card-title">Результаты расчета</h5>
+            <p class="card-text">Стоимость доставки: <span th:text="${deliveryCost}"></span></p>
+            <a href="/" class="btn btn-primary">Сбросить</a>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
