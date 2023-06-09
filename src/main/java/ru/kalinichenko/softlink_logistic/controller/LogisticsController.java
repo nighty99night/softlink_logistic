@@ -1,4 +1,4 @@
-package ru.kalinichenko.softlink_logistic;
+package ru.kalinichenko.softlink_logistic.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
