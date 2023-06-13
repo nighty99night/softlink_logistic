@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Order</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Create Order</h1>
+  <form th:action="@{/orders/create}" method="post">
+    <div class="form-group">
+      <label for="details">Details:</label>
+      <input type="text" class="form-control" id="details" name="details" required>
+    </div>
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select class="form-control" id="status" name="status" required>
+        <!-- Опции статуса заказа -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cargo">Cargo:</label>
+      <input type="text" class="form-control" id="cargo" name="cargo" required>
+    </div>
+    <div class="form-group">
+      <label for="type">Delivery Type:</label>
+      <select class="form-control" id="type" name="type" required>
+        <!-- Опции типа доставки -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="address">Order Address:</label>
+      <input type="text" class="form-control" id="address" name="address" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

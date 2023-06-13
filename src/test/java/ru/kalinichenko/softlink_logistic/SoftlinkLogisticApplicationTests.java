@@ -10,4 +10,5 @@ class SoftlinkLogisticApplicationTests {
     void contextLoads() {
     }
 
+
 }

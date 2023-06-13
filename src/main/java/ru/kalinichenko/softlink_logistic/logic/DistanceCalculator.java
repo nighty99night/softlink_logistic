@@ -1,5 +1,6 @@
 package ru.kalinichenko.softlink_logistic.logic;
 
+import lombok.extern.log4j.Log4j2;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,14 +14,22 @@ import java.net.URI;
 import java.net.URLConnection;
 
 @Component
+@Log4j2
 public class DistanceCalculator {
 
     @Value("${google.api.key}")
-    private static String API_KEY;
+    private String API_KEY = //"24f7edfddd3e62bc541a69a80e14f0f9f7918f76edd161c3891b6e1761edde2f";
+              "AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM"
+//            "AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM"
 
-    public static double getDistance(String origin, String destination) {
+    ;
+
+    public double getDistance(String origin, String destination) {
+
+
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
                 + origin + "&destinations=" + destination + "&key=" + API_KEY;
+        log.info("url = " + url);
         try {
             URLConnection connection = URI.create(url).toURL().openConnection();
             connection.connect();
@@ -31,6 +40,9 @@ public class DistanceCalculator {
                 response.append(line);
             }
             reader.close();
+
+            log.info("key = " + API_KEY);
+            log.info("response = " + response);
 
             JSONObject json = new JSONObject(response.toString());
             JSONArray rows = json.getJSONArray("rows");

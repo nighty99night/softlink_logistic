@@ -34,13 +34,16 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated())
                 .formLogin(l -> l
-//                        .loginPage("/auth/login")
+                        .loginPage("/auth/login")
                         .defaultSuccessUrl("/")
                                 .permitAll()
                 )
                 .logout(l -> l
                         .logoutUrl("/auth/logout")
-                        .logoutSuccessUrl("/auth/login"))
+                        .logoutSuccessUrl("/auth/login")
+                        .invalidateHttpSession(true)
+//                        .logoutSuccessHandler(((request, response, authentication) -> request.logout()))
+                )
 
                 .userDetailsService(userDetailsService)
 

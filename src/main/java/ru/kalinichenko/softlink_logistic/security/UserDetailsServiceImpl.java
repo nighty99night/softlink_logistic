@@ -56,6 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             @Override
             public boolean isEnabled() {
                 return true;
+                //return user.getEnabled();
             }
         };
     }

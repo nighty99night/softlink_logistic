@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Order Tracking</title>
+  <!-- Подключение стилей Bootstrap или других необходимых стилей -->
+</head>
+<body>
+<header th:replace="fragments/navbar::navigation"> </header>
+<h1>Order Tracking</h1>
+<h3>Order Details:</h3>
+<p>Order ID: <span th:text="${order.id}"></span></p>
+<p>Order Status: <span th:text="${order.status}"></span></p>
+<p>Order Details: <span th:text="${order.details}"></span></p>
+<p>Order Weight: <span th:text="${order.weight}"></span></p>
+<p>Order Distance: <span th:text="${order.distance}"></span></p>
+<!-- Дополнительные сведения о заказе и отслеживание статуса -->
+<!-- Можно использовать JavaScript для обновления статуса заказа -->
+<!-- Форма для обновления статуса заказа -->
+</body>
+</html>

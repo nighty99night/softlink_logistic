@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<header th:insert="/fragments/navbar"></header>
+
+<div class="container">
+    <h1>Order Management</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Details</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.details}"></td>
+            <td th:text="${order.status}"></td>
+            <td>
+                <a th:href="@{/order/track/{id}(id=${order.id})}" class="btn btn-primary">Track</a>
+                <!-- Другие действия для управления заказами -->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="/orders/create">Create New Order</a>
+</div>
+</body>
+</html>
