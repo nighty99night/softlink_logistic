@@ -3,8 +3,6 @@ package ru.kalinichenko.softlink_logistic.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import ru.kalinichenko.softlink_logistic.dao.UserRepository;
 import ru.kalinichenko.softlink_logistic.entity.User;
 import ru.kalinichenko.softlink_logistic.entity.auth.ConfirmationCode;
 import ru.kalinichenko.softlink_logistic.service.EmailNotificationService;
-import ru.kalinichenko.softlink_logistic.service.NotificationService;
 
 import java.util.Optional;
 import java.util.Random;

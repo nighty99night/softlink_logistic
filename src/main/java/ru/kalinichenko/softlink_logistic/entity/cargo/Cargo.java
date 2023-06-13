@@ -3,7 +3,6 @@ package ru.kalinichenko.softlink_logistic.entity.cargo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kalinichenko.softlink_logistic.entity.cargo.CargoType;
 
 @Entity
 @Table
