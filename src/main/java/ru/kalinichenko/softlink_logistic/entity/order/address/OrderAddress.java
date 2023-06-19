@@ -12,9 +12,11 @@ public class OrderAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     private City cityFrom;
     @ManyToOne
     private City cityTo;
+
     private double distance;
 }

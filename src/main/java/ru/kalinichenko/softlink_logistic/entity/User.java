@@ -37,6 +37,6 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, columnDefinition = "boolean default true")
+    @Column(columnDefinition = "BOOLEAN DEFAULT false", nullable = false)
     private Boolean enabled = false;
 }

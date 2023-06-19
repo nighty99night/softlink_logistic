@@ -6,10 +6,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kalinichenko.softlink_logistic.dao.ConfirmationCodeRepository;
 import ru.kalinichenko.softlink_logistic.dao.UserRepository;
 import ru.kalinichenko.softlink_logistic.entity.User;
@@ -53,33 +50,28 @@ public class UserController {
             public User getProbe() {
                 return finalUser;
             }
-
             @Override
             public ExampleMatcher getMatcher() {
-                return ExampleMatcher.matching()
+                return ExampleMatcher.matchingAny()
                         .withMatcher("email", ExampleMatcher.GenericPropertyMatcher::exact)
                         .withMatcher("username", ExampleMatcher.GenericPropertyMatcher::exact);
             }
         })) {
-            model.addAttribute("usernameError",
+            model.addAttribute("errorMessage",
                     "Пользователь с таким username или email уже существует");
             return "/auth/register";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         ConfirmationCode code = new ConfirmationCode();
-        code.setUser(user);
         code.setCode(String.valueOf(new Random().nextLong(1234214)) +
                 (user.getEmail() + user.getPassword() + user.getUsername()).hashCode()
         );
-
-//        notificationService.sendEmailNotification(user.getEmail(), "Confirm Registration",
-//                "Пожалуйста, используйте этот код для подтверждения регистрации: "  + code.getCode());
-
+        notificationService.sendEmailNotification(user.getEmail(), "Confirm Registration",
+                "Пожалуйста, используйте этот код для подтверждения регистрации: "  + code.getCode());
         user = userRepository.save(user);
+        code.setUser(user);
         confirmationCodeRepository.save(code);
         httpSession.setAttribute("email", user.getEmail());
-        // Перенаправляем пользователя на страницу входа после успешной регистрации
         return "redirect:/auth/register/confirm";
     }
 
@@ -91,7 +83,7 @@ public class UserController {
     }
 
     @PostMapping("/confirm")
-    public String confirmRegistration(@ModelAttribute String code) {
+    public String confirmRegistration(@RequestParam(name = "code") String code) {
         Optional<ConfirmationCode> confirmationCode = confirmationCodeRepository.findById(code);
         if (confirmationCode.isEmpty()) {
             return "/auth/confirm";
@@ -99,7 +91,7 @@ public class UserController {
         User user = confirmationCode.get().getUser();
         user.setEnabled(true);
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/auth/login";
     }
 }
 

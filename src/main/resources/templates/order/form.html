@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Order</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5; /* Светло-серый фон */
+            color: #333333; /* Черный цвет текста */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #000000; /* Черный цвет заголовков */
+        }
+
+        .container {
+            background-color: #ffffff; /* Белый фон контейнера */
+            border-radius: 5px; /* Закругленные углы контейнера */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+            padding: 20px; /* Внутренний отступ контейнера */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <h1>Create Order</h1>
-  <form th:action="@{/orders/create}" method="post">
-    <div class="form-group">
-      <label for="details">Details:</label>
-      <input type="text" class="form-control" id="details" name="details" required>
-    </div>
-    <div class="form-group">
-      <label for="status">Status:</label>
-      <select class="form-control" id="status" name="status" required>
-        <!-- Опции статуса заказа -->
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="cargo">Cargo:</label>
-      <input type="text" class="form-control" id="cargo" name="cargo" required>
-    </div>
-    <div class="form-group">
-      <label for="type">Delivery Type:</label>
-      <select class="form-control" id="type" name="type" required>
-        <!-- Опции типа доставки -->
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="address">Order Address:</label>
-      <input type="text" class="form-control" id="address" name="address" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
+<div th:insert="~{/fragments/navbar-fragment}"></div>
+<div class="container mt-4">
+  <h1 class="text-center">Создание заказа</h1>
+    <form th:action="@{'/orders/'+${action}}" method="post" th:object="${order}">
+        <div class="container p-4">
+            <div class=" mt-4">
+                <div class="mb-3" th:insert="~{/fragments/order/order-form-fragment}"></div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

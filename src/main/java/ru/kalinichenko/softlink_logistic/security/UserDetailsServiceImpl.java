@@ -1,5 +1,6 @@
 package ru.kalinichenko.softlink_logistic.security;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Component
+@Log4j2
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository repository;
 
@@ -21,6 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       log.info("username: " + username);
         User user = repository.findByUsername(username);
         return new UserDetails() {
             @Override
@@ -55,8 +58,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             @Override
             public boolean isEnabled() {
-                return true;
-                //return user.getEnabled();
+//                return true;
+                return user.getEnabled();
             }
         };
     }

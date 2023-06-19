@@ -3,7 +3,10 @@ package ru.kalinichenko.softlink_logistic.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+
+import java.util.Properties;
 
 @Configuration
 public class MailConfig {
@@ -20,8 +23,13 @@ public class MailConfig {
     private String password;
 
     @Bean
-    public JavaMailSenderImpl javaMailSender() {
+    public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.auth", "true");
+
         mailSender.setHost(host);
         mailSender.setPort(port);
         mailSender.setUsername(username);

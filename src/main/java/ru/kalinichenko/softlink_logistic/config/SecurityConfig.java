@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.kalinichenko.softlink_logistic.security.LoginSuccessHandler;
 import ru.kalinichenko.softlink_logistic.security.UserDetailsServiceImpl;
 
 @Configuration
@@ -17,9 +18,11 @@ import ru.kalinichenko.softlink_logistic.security.UserDetailsServiceImpl;
 public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final LoginSuccessHandler loginSuccessHandler;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, LoginSuccessHandler loginSuccessHandler) {
         this.userDetailsService = userDetailsService;
+        this.loginSuccessHandler = loginSuccessHandler;
     }
 
     @Bean
@@ -29,14 +32,15 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(r -> r.requestMatchers("/auth/**")
+                .authorizeHttpRequests(r -> r.requestMatchers("/auth/**", "/home/**", "/img/main/**", "/shipping/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
                 .formLogin(l -> l
                         .loginPage("/auth/login")
                         .defaultSuccessUrl("/")
-                                .permitAll()
+                        .successHandler(loginSuccessHandler)
+                        .permitAll()
                 )
                 .logout(l -> l
                         .logoutUrl("/auth/logout")
@@ -52,8 +56,5 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder(12);
-    }
+
 }

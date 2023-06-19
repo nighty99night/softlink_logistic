@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница не существует</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: #f5f5f5; /* Светло-серый фон */
+      color: #333333; /* Черный цвет текста */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #000000; /* Черный цвет заголовков */
+    }
+
+    .container {
+      background-color: #ffffff; /* Белый фон контейнера */
+      border-radius: 5px; /* Закругленные углы контейнера */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+      padding: 20px; /* Внутренний отступ контейнера */
+    }
+
+    .carousel-item img {
+      height: 100%;
+      width: 100%;
+      object-fit: fill; /* Заполняет контейнер, сохраняя пропорции и обрезая изображение при необходимости */
+    }
+
+    .carousel-item {
+      height: 800px; /* Задайте фиксированную высоту для контейнера карусели */
+    }
+
+    @media print {
+      /* Стили для печати */
+      body {
+        background-color: #ffffff; /* Белый фон */
+        color: #000000; /* Черный цвет текста */
+      }
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{/fragments/navbar-fragment}"></div>
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h2 class="display-4">Страница не существует - <span class="font-weight-bold">404</span></h2>
+    <p class="lead">Страница, на которую вы пытаетесь перейти не существует или пока что не реализована))</p>
+    <hr class="my-4">
+    <p>Пожалуйста, вернитесь на главную страницу</p>
+    <p class="lead">
+      <a class="btn btn-primary" th:href="@{/home}" role="button">Вернуться</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>

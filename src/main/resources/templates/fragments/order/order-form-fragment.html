@@ -1,0 +1,69 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:id="http://www.w3.org/1999/xhtml">
+
+<body>
+<div class="form-group d-flex justify-content-around align-items-stretch flex-column " th:object="${order}">
+
+    <div class="row input-group mb-3">
+        <div class="col-md-3">
+            <label for="from" class="form-label">Город отправления</label>
+            <input class="form-control" type="text" id="from" name="from" autocomplete="off" th:field="*{address.cityFrom.name}" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="to" class="form-label">Город назначения</label>
+            <input class="form-control" type="text" id="to" name="to" autocomplete="off" th:field="*{address.cityTo.name}" required>
+        </div>
+    </div>
+
+    <div class="row input-group mb-3">
+        <div class="col-md-4">
+            <label for="weight" class="form-label">Вес груза (кг)</label>
+            <input type="number" class="form-control" id="weight" name="weight" placeholder="Вес груза" th:field="*{cargo.weight}" min="0.1" step="0.1">
+        </div>
+        <div class="col-md-4">
+            <label for="volume" class="form-label">Объем (м^3)</label>
+            <input type="number" step="0.1" class="form-control" id="volume" name="volume" placeholder="Объем груза" th:field="*{cargo.volume}" min="0.1">
+        </div>
+        <div class="col-md-4">
+            <label for="type">Тип груза:</label>
+            <select class="form-control" id="type" name="type" th:field="*{cargo.type}" required>
+                <option th:each="type : ${types}" th:value="${type.name}" th:text="${type.name}"/>
+            </select>
+        </div>
+    </div>
+
+    <div class="row input-group mb-3" th:if="${detailsFieldVisible}">
+        <div class="col">
+            <label for="details" class="form-label">Описание</label>
+            <!--        <input type="text" size="50" maxlength="255" class="form-control" id=details name="details" th:field="*{details}">-->
+            <textarea class="form-control" id="details" rows="2" th:field="*{details}"></textarea>
+        </div>
+    </div>
+
+</div>
+
+<div th:insert="~{/fragments/error-message-fragment}"></div>
+
+<script>
+    $(function() {
+        $("#from","#to").autocomplete({
+            source: function(request, response) {
+                // Send an AJAX request to the server to get the suggestions based on the user input
+                $.ajax({
+                    url: "/cities", // Replace with the appropriate URL to fetch suggestions
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        // Process the response data and pass it to the autocomplete widget
+                        response(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ</title>
+</head>
+<body>
+  <div th:object="${order}" class="container-md">
+    <p th:text="*{details}"></p>
+
+    <button th:href="@{'/orders/'+order.id}">Удалить</button>
+  </div>
+</body>
+</html>

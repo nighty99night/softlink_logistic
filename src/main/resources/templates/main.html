@@ -4,18 +4,83 @@
   <title>Логистический веб-сервис</title>
   <!-- Подключение стилей и скриптов -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f5f5f5; /* Светло-серый фон */
+      color: #333333; /* Черный цвет текста */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #000000; /* Черный цвет заголовков */
+    }
+
+    .container {
+      background-color: #ffffff; /* Белый фон контейнера */
+      border-radius: 5px; /* Закругленные углы контейнера */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+      padding: 20px; /* Внутренний отступ контейнера */
+    }
+
+    .carousel-item img {
+      height: 100%;
+      width: 100%;
+      object-fit: fill; /* Заполняет контейнер, сохраняя пропорции и обрезая изображение при необходимости */
+    }
+
+    .carousel-item {
+      height: 800px; /* Задайте фиксированную высоту для контейнера карусели */
+    }
+
+    @media print {
+      /* Стили для печати */
+      body {
+        background-color: #ffffff; /* Белый фон */
+        color: #000000; /* Черный цвет текста */
+      }
+    }
+  </style>
 </head>
 <body>
 <!-- Включение навигационной панели -->
-<header th:insert="~{/fragments/navbar}"></header>
+<header th:insert="~{/fragments/navbar-fragment}"></header>
 
-<div class="container">
+<div class="container mt-5">
   <h1>Логистический веб-сервис</h1>
   <p>Добро пожаловать в логистический веб-сервис. Здесь вы можете управлять заказами и рассчитывать стоимость доставки.</p>
 
   <!-- Добавьте здесь описание и функционал вашего веб-сервиса -->
 
-</div>
+  <div id="imageCarousel" class="carousel slide" data-ride="carousel" th:with="count=${5}">
+    <!-- Индикаторы слайдов -->
+    <ol class="carousel-indicators">
+      <li th:each="i: ${#numbers.sequence(1, count)}" data-target="#imageCarousel" th:class="${i==1?'active':''}" th:attr="data-slide-to=${i}"></li>
+    </ol>
+
+    <!-- Слайды -->
+    <div class="carousel-inner" >
+      <div th:each="i: ${#numbers.sequence(1, count)}" th:class="'carousel-item ' + ${i==1? 'active': ''}">
+        <img th:src="@{${'/img/main/img' + i + '.png'}}" th:alt="'Image' + ${i}" class="d-block w-100">
+      </div>
+
+      <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <!-- Подключение библиотеки jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- Подключение библиотеки JavaScript Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </div>
 </body>
 </html>

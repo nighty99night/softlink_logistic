@@ -10,10 +10,8 @@ import ru.kalinichenko.softlink_logistic.entity.User;
 @Getter
 @Setter
 public class ConfirmationCode {
-
     @Id
     private String code;
-
     @ManyToOne
     private User user;
 }

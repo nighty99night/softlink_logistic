@@ -1,0 +1,10 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="error" class="mb-2">
+  <div class="alert alert-ganger" th:name="errorMessage" role="alert">
+    <p class="text-center text-danger" th:text="${errorMessage}"></p>
+  </div>
+</div>
+</body>
+
+</html>

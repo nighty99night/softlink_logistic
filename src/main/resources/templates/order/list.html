@@ -1,39 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
+    <meta charset="utf-8">
     <title>Orders</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #f5f5f5; /* Светло-серый фон */
+            color: #333333; /* Черный цвет текста */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #000000; /* Черный цвет заголовков */
+        }
+
+        .container {
+            background-color: #ffffff; /* Белый фон контейнера */
+            border-radius: 5px; /* Закругленные углы контейнера */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+            padding: 20px; /* Внутренний отступ контейнера */
+        }
+    </style>
 </head>
-<body>
+<body class="">
 
-<header th:insert="/fragments/navbar"></header>
+<header th:insert="~{/fragments/navbar-fragment}"></header>
 
-<div class="container">
-    <h1>Order Management</h1>
+<div class="container w-100 d-flex justify-content-around flex-column">
 
-    <table class="table">
+    <h1 class="text-center m-2" >Управление заказами</h1>
+    <table class=" table table-bordered text-center">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Details</th>
-            <th>Status</th>
-            <th>Actions</th>
+        <tr class="text-center">
+            <th>Идентификатор:</th>
+            <th>Статус</th>
+            <th>Описание</th>
+            <th>Вес (кг)</th>
+            <th>Объем (м^3)</th>
+            <th>Расстояние доставки (км)</th>
+            <th>Стоимость (руб)</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>Редактировать</th>
+            <th>Удалить</th>
         </tr>
         </thead>
-        <tbody>
+
+        <tbody class="text-center ">
+
         <tr th:each="order : ${orders}">
-            <td th:text="${order.id}"></td>
-            <td th:text="${order.details}"></td>
-            <td th:text="${order.status}"></td>
             <td>
-                <a th:href="@{/order/track/{id}(id=${order.id})}" class="btn btn-primary">Track</a>
-                <!-- Другие действия для управления заказами -->
+                <span th:text="${order.id}"></span>
             </td>
+            <td>
+                <span th:text="${order.status.name}"></span>
+            </td>
+            <td class="text-wrap text-break">
+                <span th:text="${order.details}"></span>
+            </td>
+            <td>
+                <span th:text="${order.cargo.weight}"></span>
+            </td>
+            <td>
+                <span th:text="${order.cargo.volume}"></span>
+            </td>
+            <td>
+                <span th:text="${order.address.distance}"></span>
+            </td>
+            <td>
+                <span th:text="${order.price}"></span>
+            </td>
+            <td>
+                <span th:text="${order.address.getCityFrom().name}"></span>
+            </td>
+            <td>
+                <span th:text="${order.address.getCityTo().name}"></span>
+            </td>
+            <td>
+                <a th:href="@{'/orders/'+${order.id}+'/edit'}" class="btn badge-info" th:title="Редактировать">Редактировать</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" title="Удалить" data-toggle="modal" data-target="#exampleModalCenter">X</button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Вы действительно хотите удалить заказ?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Этот заказ будет отменен</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                                <a class="btn btn-danger" th:href="@{'/orders/'+${order.id}+'/delete'}">Да</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
         </tr>
+
         </tbody>
     </table>
-    <a class="btn btn-success" href="/orders/create">Create New Order</a>
+    <a class="btn btn-success mt-4" href="/orders/create">Создать!</a>
 </div>
+
+<!-- Modal -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
