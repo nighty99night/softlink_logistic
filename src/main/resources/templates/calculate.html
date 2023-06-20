@@ -30,13 +30,13 @@
 </head>
 
 <body>
-<header th:insert="~{fragments/navbar-fragment}"></header>
+<header th:insert="~{fragments/navbar-fragment :: navigation}"></header>
 <div>
 <div class="container rounded display-center mx-auto">
     <h1 class="mt-3 text-center">Расчет стоимости доставки</h1>
     <hr>
     <form th:action="@{/shipping}" method="post" th:object="${order}">
-            <div th:insert="~{/fragments/order/order-form-fragment}" class="mb-2"></div>
+            <div th:insert="~{fragments/order/order-form-fragment :: order-form}" class="mb-2"></div>
 
             <div class= "container-fluid btn-group clearfix d-flex justify-content-around mb-2 w-50">
                 <input class="btn btn-success form-control float-left mr-5" type="submit" value="Рассчитать" data-target="modal-dialog">

@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<div th:insert="~{/fragments/navbar-fragment}"></div>
+<div th:insert="~{fragments/navbar-fragment :: navigation}"></div>
 <div class="container mt-4">
   <h1 class="text-center">Создание заказа</h1>
     <form th:action="@{'/orders/'+${action}}" method="post" th:object="${order}">
