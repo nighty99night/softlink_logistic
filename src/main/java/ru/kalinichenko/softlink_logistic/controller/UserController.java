@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "/auth/register";
+        return "auth/register";
     }
 
     @PostMapping
@@ -59,7 +59,7 @@ public class UserController {
         })) {
             model.addAttribute("errorMessage",
                     "Пользователь с таким username или email уже существует");
-            return "/auth/register";
+            return "auth/register";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         ConfirmationCode code = new ConfirmationCode();
@@ -72,26 +72,26 @@ public class UserController {
         code.setUser(user);
         confirmationCodeRepository.save(code);
         httpSession.setAttribute("email", user.getEmail());
-        return "redirect:/auth/register/confirm";
+        return "redirect:auth/register/confirm";
     }
 
     @GetMapping("/confirm")
     public String confirmPage(Model model, HttpSession session){
         String email = (String) session.getAttribute("email");
         model.addAttribute("email", email);
-        return "/auth/confirm";
+        return "auth/confirm";
     }
 
     @PostMapping("/confirm")
     public String confirmRegistration(@RequestParam(name = "code") String code) {
         Optional<ConfirmationCode> confirmationCode = confirmationCodeRepository.findById(code);
         if (confirmationCode.isEmpty()) {
-            return "/auth/confirm";
+            return "auth/confirm";
         }
         User user = confirmationCode.get().getUser();
         user.setEnabled(true);
         userRepository.save(user);
-        return "redirect:/auth/login";
+        return "redirect:auth/login";
     }
 }
 
