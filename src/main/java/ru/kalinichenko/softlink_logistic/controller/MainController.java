@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Log4j2
 @Controller
-@RequestMapping("/home")
+@RequestMapping("home")
 public class MainController {
     @GetMapping
     public String getPage(HttpSession httpSession){
