@@ -14,12 +14,12 @@
             color: #000000; /* Черный цвет заголовков */
         }
 
-        .container {
-            background-color: #ffffff; /* Белый фон контейнера */
-            border-radius: 5px; /* Закругленные углы контейнера */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень контейнера */
-            padding: 20px; /* Внутренний отступ контейнера */
-        }
+        /*.container {
+            background-color: #ffffff; !* Белый фон контейнера *!
+            border-radius: 5px; !* Закругленные углы контейнера *!
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); !* Тень контейнера *!
+            padding: 20px; !* Внутренний отступ контейнера *!
+        }*/
 
         .registration-form input[type="submit"] {
             width: 100%;
@@ -39,7 +39,7 @@
 </head>
 <body>
 <header th:insert="~{fragments/navbar-fragment :: navigation}"></header>
-<div class="container w-25">
+<div class="container shadow-sm p-3 mb-5 bg-white rounded w-50">
     <div class="registration-form">
         <h1 class="text-center">Регистрация</h1>
 
