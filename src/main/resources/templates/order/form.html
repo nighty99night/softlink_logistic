@@ -30,7 +30,7 @@
     <form th:action="@{'/orders/'+${action}}" method="post" th:object="${order}">
         <div class="container p-4">
             <div class=" mt-4">
-                <div class="mb-3" th:insert="~{/fragments/order/order-form-fragment}"></div>
+                <div class="mb-3" th:insert="~{fragments/order/order-form-fragment :: order-form}"></div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>
         </div>
