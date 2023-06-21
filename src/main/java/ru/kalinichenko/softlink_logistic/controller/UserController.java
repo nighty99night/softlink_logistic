@@ -38,7 +38,6 @@ public class UserController {
 
     @PostMapping
     public String registerUser(@ModelAttribute("user") User user, Model model, HttpSession httpSession) {
-        User finalUser = user;
         if (userService.exists(user)) {
             model.addAttribute("errorMessage",
                     "Пользователь с таким username или email уже существует");
@@ -53,7 +52,7 @@ public class UserController {
     public String confirmPage(Model model, HttpSession session){
         String email = (String) session.getAttribute("email");
         model.addAttribute("email", email);
-        return "/auth/confirm";
+        return "auth/confirm";
     }
 
     @PostMapping("/confirm")
