@@ -14,7 +14,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_THYMELEAF_PREFIX: classpath:/templates/
   db:
-    image: postgres:14
+    image: postgres:15-alpine
     restart: always
     ports:
       - "5432:5432"
